@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{46616D96-223F-4F9C-9593-C96D6E632ED1}</ProjectGuid>
+    <ProjectGuid>{44D0269F-BAE5-4C54-A4EA-DAA54E09C538}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>CarScenario</RootNamespace>
-    <AssemblyName>CarScenario</AssemblyName>
+    <RootNamespace>Question2</RootNamespace>
+    <AssemblyName>Question2</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Car.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
