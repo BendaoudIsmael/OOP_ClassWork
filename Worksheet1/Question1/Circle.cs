@@ -8,7 +8,7 @@ namespace Question1
 {
     class Circle
     {
-        double radius; //radius is a field for the Circle type
+        public double radius; //radius is a field for the Circle type
 
         /*
          * GetRadius() is a method called for cirlce objects to display the circle's radius on the console
