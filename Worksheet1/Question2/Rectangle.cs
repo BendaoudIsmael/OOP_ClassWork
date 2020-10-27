@@ -8,5 +8,12 @@ namespace Question2
 {
     class Rectangle
     {
+        double width, height;
+
+        void ShowArea()
+        {
+            double  ShowArea = width * height;
+            Console.WriteLine();
+        }
     }
 }

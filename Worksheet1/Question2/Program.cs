@@ -10,6 +10,11 @@ namespace Question2
     {
         static void Main(string[] args)
         {
+
+            Rectangle myObject = new Rectangle();
+            myObject.GetArea();
+            Console.ReadKey();
+
         }
     }
 }
