@@ -36,9 +36,9 @@ namespace Question1
             */
 
             // Question 2
-            Circle c1 = new Circle();
-            Circle c2 = new Circle();
-            Circle c3 = new Circle();
+            Circle c1 = new Circle(2.4);
+            Circle c2 = new Circle(5.6);
+            Circle c3 = new Circle(7.8);
 
             Console.WriteLine(c1.GetRadius());
             Console.WriteLine("The area for circle 1 is " + c1.GetArea());

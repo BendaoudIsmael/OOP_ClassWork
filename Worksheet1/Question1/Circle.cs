@@ -17,6 +17,16 @@ namespace Question1
          * it has no retrun type (void means no return type) and no parameters (no vlaues between brackets)
          */
 
+        public Circle(double radius)
+        {
+            this.radius = radius;
+            /*
+             * the This keywoard refereces to this current circle object 
+             * we are making the radius attribute for this current circle equal to the radius value which is passed as a 
+             * parameter/argument
+             */
+        }
+
         public string GetRadius() // method definition --> {} (Creating our method)
         {
 
