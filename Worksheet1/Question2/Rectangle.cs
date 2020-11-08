@@ -11,6 +11,12 @@ namespace Question2
     {
         public double length;
         public double width;
+
+        public Rectangle(double length, double width)
+        {
+            this.length = length;
+            this.width = width;
+        }
         
        public void CalculateArea() /* This is a method definition and a method definiton explains
         how the method will execute once it is called. If it is called the code will never be executed*/

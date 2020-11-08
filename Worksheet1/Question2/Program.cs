@@ -11,6 +11,9 @@ namespace Question2
         static void Main(string[] args)
         {
 
+            /*
+             * Question 2
+             * 
             Rectangle rect1 = new Rectangle();
             Rectangle rect2 = new Rectangle();
             Rectangle rect3 = new Rectangle();
@@ -20,7 +23,8 @@ namespace Question2
              *variable = method()
              *So method() will be converted to the returned value and the retunred value will be saved
              *in the variable
-             */
+             
+            
 
             Console.Write("Please enter the length for rectangle 1: ");
             rect1.length = Convert.ToDouble(Console.ReadLine());
@@ -50,6 +54,25 @@ namespace Question2
             rect3.width = Convert.ToDouble(Console.ReadLine());
 
             Console.WriteLine("Rectangle 3 details: ");
+            rect3.CalculateArea();
+            rect3.CalculatePerimeter();
+            */
+           
+
+
+            Rectangle rect1 = new Rectangle(3.4, 6.8);
+            Rectangle rect2 = new Rectangle(5.5, 2.3);
+            Rectangle rect3 = new Rectangle(1.7, 3.9);
+
+            Console.WriteLine("Rectangle 1's details:");
+            rect1.CalculateArea();
+            rect1.CalculatePerimeter();
+
+            Console.WriteLine("Rectangle 2's details:");
+            rect2.CalculateArea();
+            rect2.CalculatePerimeter();
+
+            Console.WriteLine("Rectangle 3's details:");
             rect3.CalculateArea();
             rect3.CalculatePerimeter();
 

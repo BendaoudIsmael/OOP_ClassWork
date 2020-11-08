@@ -10,20 +10,21 @@ namespace Question6
     {
         static void Main(string[] args)
         {
-            Person p1 = new Person();
-            Person p2 = new Person();
+            Person p1 = new Person(239600);
+            Person p2 = new Person(293700, "Deandra", 26, "Xghajra", "Red");
 
-            p1.ID = 293600;
+         //   p1.ID = 293600;
             p1.Age = 20;
             p1.FavColour = "Black";
             p1.Name = "Any";
             p1.Locality = "Zabbar";
 
-            p2.ID = 293700;
+            /*p2.ID = 293700;
             p2.Age = 26;
             p2.FavColour = "Red";
             p2.Name = "Deandra";
             p2.Locality = "Xghajra";
+            */
 
             Person[] persons = new Person[2];
             persons[0] = p1;

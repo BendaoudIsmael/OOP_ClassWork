@@ -32,7 +32,6 @@ namespace Question7
             }
 
             Console.ReadKey();
-
         }
     }
 }

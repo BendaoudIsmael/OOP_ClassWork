@@ -38,21 +38,22 @@ namespace Question1
             // Question 2
             Circle c1 = new Circle(2.4);
             Circle c2 = new Circle(5.6);
-            Circle c3 = new Circle(7.8);
+            Circle c3 = new Circle(1.6);
+            Circle c4 = new Circle();
 
-            Console.WriteLine(c1.GetRadius());
+           // Console.WriteLine(c1.GetRadius());
             Console.WriteLine("The area for circle 1 is " + c1.GetArea());
             Console.WriteLine("The circumference for circle 1 is " + c1.GetCircumference());
 
-            Console.WriteLine(c2.GetRadius());
+           // Console.WriteLine(c2.GetRadius());
             Console.WriteLine("The area for circle 2 is " + c2.GetArea());
             Console.WriteLine("The circumference for circle 2 is " + c2.GetCircumference());
 
-            Console.WriteLine(c3.GetRadius());
+           // Console.WriteLine(c3.GetRadius());
             Console.WriteLine("The area for circle 3 is " + c3.GetArea());
             Console.WriteLine("The circumference for circle 3 is " + c3.GetCircumference());
 
-            Console.ReadKey();
+            Console.ReadKey(); //method call
         }
     }
 }
