@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Question6
+namespace Worksheet2
 {
     class Program
     {
