@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{95C30657-1842-47F6-A380-ED43327DFD8E}</ProjectGuid>
+    <ProjectGuid>{3D06B482-85B3-4901-A1D1-B3CAB66F1F21}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Worksheet2</RootNamespace>
-    <AssemblyName>Worksheet2</AssemblyName>
+    <RootNamespace>CatalougeProject</RootNamespace>
+    <AssemblyName>CatalougeProject</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,9 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Car.cs" />
+    <Compile Include="Catalogue.cs" />
+    <Compile Include="ItemForSale.cs" />
+    <Compile Include="Page.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shop.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

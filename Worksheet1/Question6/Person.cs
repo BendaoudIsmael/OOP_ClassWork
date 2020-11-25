@@ -85,7 +85,5 @@ namespace Question6
         {
             return favColour;
         }
-
-
     }
 }
