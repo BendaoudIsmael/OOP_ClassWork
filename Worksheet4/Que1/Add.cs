@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Worksheet5
+namespace Que1
 {
-    class Program
+    class Add
     {
-        static void Main(string[] args)
-        {
-
-        }
     }
 }
