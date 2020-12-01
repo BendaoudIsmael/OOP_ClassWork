@@ -20,5 +20,15 @@ namespace FelidaePeoject
         {
             this.weight = weight;
         }
+
+        protected string Ambush()
+        {
+            return "Attack Now";
+        }
+
+        public override string CatchPrey()
+        {
+            return base.Hide() + "\n" + this.Ambush() + "\n" + base.Run();
+        }
     }
 }
