@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace Que1
 {
-    class Animal
+    abstract class Animal
     {
+        string speak;
+        string sound;
+
+        public string Speak1 { get => speak; set => speak = value; }
+        public string Sound { get => sound; set => sound = value; }
+
         public virtual string Speak()
         {
             return "Hello!";
