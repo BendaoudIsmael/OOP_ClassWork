@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchoolProject
+namespace Data
 {
-    class Program
+    class ConnectionClass
     {
-        static void Main(string[] args)
-        {
-        }
+        
     }
 }
