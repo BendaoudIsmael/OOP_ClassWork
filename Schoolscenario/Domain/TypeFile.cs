@@ -18,4 +18,26 @@ namespace Domain
             TeacherName = teacherName;
         }
     }
+
+    public partial class Course
+    {
+        public Course(int id, string name, int teacherID)
+        {
+            ID = id;
+            CourseName = name;
+            teacherID = teacherID;
+        }
+    }
+
+    public partial class Student
+    {
+        public Student(int id, string name, int teacherID)
+        {
+            ID = id;
+            Name = name;
+            Surname = Surname;
+            CourseID = CourseID;
+        }
+    }
+
 }

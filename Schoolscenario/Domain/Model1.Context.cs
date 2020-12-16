@@ -16,7 +16,7 @@ namespace Domain
     public partial class SchoolDatabaseEntities1 : DbContext
     {
         public SchoolDatabaseEntities1()
-            : base("name=SchoolDatabaseEntities1")
+            : base("SchoolDatabaseEntities1")
         {
         }
     
