@@ -13,10 +13,10 @@ namespace Domain
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SchoolDatabaseEntities1 : DbContext
+    public partial class SchoolDatabaseEntities : DbContext
     {
-        public SchoolDatabaseEntities1()
-            : base("SchoolDatabaseEntities1")
+        public SchoolDatabaseEntities()
+            : base("name=SchoolDatabaseEntities")
         {
         }
     
@@ -27,7 +27,7 @@ namespace Domain
     
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<Student> Students { get; set; }
-        public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<StudentAddress> StudentAddresses { get; set; }
+        public virtual DbSet<Teacher> Teachers { get; set; }
     }
 }

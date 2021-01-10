@@ -18,18 +18,16 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" />
           <Property Name="CourseID" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'SchoolDatabase.dbo.StudentAddress' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="StudentAddress">
           <Key>
             <PropertyRef Name="StudentID" />
           </Key>
           <Property Name="StudentID" Type="int" Nullable="false" />
-          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar(max)" />
           <Property Name="City" Type="nvarchar" MaxLength="50" />
           <Property Name="PostCode" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -79,15 +77,8 @@ warning 6002: The table/view 'SchoolDatabase.dbo.StudentAddress' does not have a
         <EntityContainer Name="SchoolDatabaseModelStoreContainer">
           <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentAddress" EntityType="Self.StudentAddress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="StudentAddress" EntityType="Self.StudentAddress" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [StudentAddress].[StudentID] AS [StudentID], 
-    [StudentAddress].[Address] AS [Address], 
-    [StudentAddress].[City] AS [City], 
-    [StudentAddress].[PostCode] AS [PostCode]
-    FROM [dbo].[StudentAddress] AS [StudentAddress]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Course_Teacher" Association="Self.FK_Course_Teacher">
             <End Role="Teacher" EntitySet="Teacher" />
             <End Role="Course" EntitySet="Course" />
@@ -105,6 +96,24 @@ warning 6002: The table/view 'SchoolDatabase.dbo.StudentAddress' does not have a
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SchoolDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SchoolDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Courses" EntityType="SchoolDatabaseModel.Course" />
+          <EntitySet Name="Students" EntityType="SchoolDatabaseModel.Student" />
+          <EntitySet Name="StudentAddresses" EntityType="SchoolDatabaseModel.StudentAddress" />
+          <EntitySet Name="Teachers" EntityType="SchoolDatabaseModel.Teacher" />
+          <AssociationSet Name="FK_Course_Teacher" Association="SchoolDatabaseModel.FK_Course_Teacher">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="Course" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Course" Association="SchoolDatabaseModel.FK_Student_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentAddress_Student" Association="SchoolDatabaseModel.FK_StudentAddress_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentAddress" EntitySet="StudentAddresses" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Course">
           <Key>
             <PropertyRef Name="ID" />
@@ -112,19 +121,29 @@ warning 6002: The table/view 'SchoolDatabase.dbo.StudentAddress' does not have a
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="CourseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TeacherID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Teacher" Relationship="Self.FK_Course_Teacher" FromRole="Course" ToRole="Teacher" />
-          <NavigationProperty Name="Students" Relationship="Self.FK_Student_Course" FromRole="Course" ToRole="Student" />
+          <NavigationProperty Name="Teacher" Relationship="SchoolDatabaseModel.FK_Course_Teacher" FromRole="Course" ToRole="Teacher" />
+          <NavigationProperty Name="Students" Relationship="SchoolDatabaseModel.FK_Student_Course" FromRole="Course" ToRole="Student" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CourseID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Course" Relationship="Self.FK_Student_Course" FromRole="Student" ToRole="Course" />
-          <NavigationProperty Name="StudentAddress" Relationship="Self.FK_StudentAddress_Student" FromRole="Student" ToRole="StudentAddress" />
+          <NavigationProperty Name="Course" Relationship="SchoolDatabaseModel.FK_Student_Course" FromRole="Student" ToRole="Course" />
+          <NavigationProperty Name="StudentAddress" Relationship="SchoolDatabaseModel.FK_StudentAddress_Student" FromRole="Student" ToRole="StudentAddress" />
+        </EntityType>
+        <EntityType Name="StudentAddress">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Student" Relationship="SchoolDatabaseModel.FK_StudentAddress_Student" FromRole="StudentAddress" ToRole="Student" />
         </EntityType>
         <EntityType Name="Teacher">
           <Key>
@@ -132,21 +151,11 @@ warning 6002: The table/view 'SchoolDatabase.dbo.StudentAddress' does not have a
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="TeacherName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Courses" Relationship="Self.FK_Course_Teacher" FromRole="Teacher" ToRole="Course" />
-        </EntityType>
-        <EntityType Name="StudentAddress">
-          <Key>
-            <PropertyRef Name="StudentID" />
-          </Key>
-          <Property Name="StudentID" Type="Int32" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PostCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Student" Relationship="Self.FK_StudentAddress_Student" FromRole="StudentAddress" ToRole="Student" />
+          <NavigationProperty Name="Courses" Relationship="SchoolDatabaseModel.FK_Course_Teacher" FromRole="Teacher" ToRole="Course" />
         </EntityType>
         <Association Name="FK_Course_Teacher">
-          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
-          <End Role="Course" Type="Self.Course" Multiplicity="*" />
+          <End Type="SchoolDatabaseModel.Teacher" Role="Teacher" Multiplicity="1" />
+          <End Type="SchoolDatabaseModel.Course" Role="Course" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Teacher">
               <PropertyRef Name="ID" />
@@ -157,8 +166,8 @@ warning 6002: The table/view 'SchoolDatabase.dbo.StudentAddress' does not have a
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Student_Course">
-          <End Role="Course" Type="Self.Course" Multiplicity="1" />
-          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <End Type="SchoolDatabaseModel.Course" Role="Course" Multiplicity="1" />
+          <End Type="SchoolDatabaseModel.Student" Role="Student" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Course">
               <PropertyRef Name="ID" />
@@ -169,8 +178,8 @@ warning 6002: The table/view 'SchoolDatabase.dbo.StudentAddress' does not have a
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StudentAddress_Student">
-          <End Role="Student" Type="Self.Student" Multiplicity="1" />
-          <End Role="StudentAddress" Type="Self.StudentAddress" Multiplicity="0..1" />
+          <End Type="SchoolDatabaseModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="SchoolDatabaseModel.StudentAddress" Role="StudentAddress" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Student">
               <PropertyRef Name="ID" />
@@ -180,64 +189,46 @@ warning 6002: The table/view 'SchoolDatabase.dbo.StudentAddress' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SchoolDatabaseEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Courses" EntityType="Self.Course" />
-          <EntitySet Name="Students" EntityType="Self.Student" />
-          <EntitySet Name="Teachers" EntityType="Self.Teacher" />
-          <EntitySet Name="StudentAddresses" EntityType="Self.StudentAddress" />
-          <AssociationSet Name="FK_Course_Teacher" Association="Self.FK_Course_Teacher">
-            <End Role="Teacher" EntitySet="Teachers" />
-            <End Role="Course" EntitySet="Courses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Student_Course" Association="Self.FK_Student_Course">
-            <End Role="Course" EntitySet="Courses" />
-            <End Role="Student" EntitySet="Students" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StudentAddress_Student" Association="Self.FK_StudentAddress_Student">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="StudentAddress" EntitySet="StudentAddresses" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SchoolDatabaseModelStoreContainer" CdmEntityContainer="SchoolDatabaseEntities1">
+        <EntityContainerMapping StorageEntityContainer="SchoolDatabaseModelStoreContainer" CdmEntityContainer="SchoolDatabaseEntities">
           <EntitySetMapping Name="Courses">
             <EntityTypeMapping TypeName="SchoolDatabaseModel.Course">
               <MappingFragment StoreEntitySet="Course">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
                 <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Students">
             <EntityTypeMapping TypeName="SchoolDatabaseModel.Student">
               <MappingFragment StoreEntitySet="Student">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="CourseID" ColumnName="CourseID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Teachers">
-            <EntityTypeMapping TypeName="SchoolDatabaseModel.Teacher">
-              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="TeacherName" ColumnName="TeacherName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StudentAddresses">
             <EntityTypeMapping TypeName="SchoolDatabaseModel.StudentAddress">
               <MappingFragment StoreEntitySet="StudentAddress">
-                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teachers">
+            <EntityTypeMapping TypeName="SchoolDatabaseModel.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="TeacherName" ColumnName="TeacherName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
